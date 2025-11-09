@@ -36,7 +36,7 @@ def main():
         plt.grid(False)
         plt.imshow(train_images[i], cmap=plt.cm.binary)
         plt.xlabel(class_names[train_labels[i]])
-    #plt.show()
+    plt.show()
 
     # 데이터 스케일링
     train_images = train_images / 255.0
