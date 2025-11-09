@@ -10,11 +10,10 @@ def main():
 
     ## 필요한 패키지 로드
     from keras.models import Sequential
-    from keras.layers import Dense
+    from keras.layers import Dense, Flatten
     from keras.datasets import fashion_mnist
     import numpy as np
     import matplotlib.pyplot as plt
-    from keras.layers import Flatten
 
     ## Fashion MNIST 데이터셋 불러오기
     #fashion_mnist = keras.datasets.fashion_mnist # 중복으로 인해 실행 오류로 주석처리
@@ -37,7 +36,7 @@ def main():
         plt.grid(False)
         plt.imshow(train_images[i], cmap=plt.cm.binary)
         plt.xlabel(class_names[train_labels[i]])
-    plt.show()
+    #plt.show()
 
     # 데이터 스케일링
     train_images = train_images / 255.0
@@ -46,8 +45,8 @@ def main():
     # 모델 구성
     model = Sequential()
     model.add(Flatten(input_shape=(28, 28)))
-    model.add(Dense(200, activation='relu'))
-    model.add(Dense(180, activation='relu'))
+    model.add(Dense(240, activation='relu'))
+    model.add(Dense(100, activation='relu'))
     model.add(Dense(10, activation='softmax'))
     model.summary()
 
@@ -55,6 +54,7 @@ def main():
     model.compile(optimizer='adam',
                     loss='sparse_categorical_crossentropy',
                     metrics=['accuracy'])
+
     model.fit(train_images, train_labels, epochs=10, batch_size=64, verbose=1)
 
 # 모델 테스트
